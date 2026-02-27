@@ -336,43 +336,11 @@ const modelState = {
   rotSpeedZ: Math.sin(initialAngle3) * 2,
 };
 
-function updateModelState(dt: number) {
-  const tSpeed = 1.6 * dt;
-  const rSpeed = 1.8 * dt;
-  const sSpeed = 1.2 * dt;
-
-  // Object translation
-  if (keys.has("j") || keys.has("J")) modelState.tx -= tSpeed;
-  if (keys.has("l") || keys.has("L")) modelState.tx += tSpeed;
-  if (keys.has("u") || keys.has("U")) modelState.ty += tSpeed;
-  if (keys.has("o") || keys.has("O")) modelState.ty -= tSpeed;
-  if (keys.has("i") || keys.has("I")) modelState.tz -= tSpeed;
-  if (keys.has("k") || keys.has("K")) modelState.tz += tSpeed;
-
-  // Object rotation
-  if (keys.has("t") || keys.has("T")) modelState.rx += rSpeed;
-  if (keys.has("g") || keys.has("G")) modelState.rx -= rSpeed;
-  if (keys.has("y") || keys.has("Y")) modelState.ry += rSpeed;
-  if (keys.has("h") || keys.has("H")) modelState.ry -= rSpeed;
-  if (keys.has("r") || keys.has("R")) modelState.rz += rSpeed;
-  if (keys.has("f") || keys.has("F")) modelState.rz -= rSpeed;
-
-  // Uniform scale
-  if (keys.has("x") || keys.has("X")) modelState.s += sSpeed;
-  if (keys.has("z") || keys.has("Z")) modelState.s = Math.max(0.1, modelState.s - sSpeed);
-
+function updateModelState() {
   // Order toggles
   if (keys.has("1")) modelState.order = "TRS";
   if (keys.has("2")) modelState.order = "RTS";
   if (keys.has("3")) modelState.order = "SRT";
-
-  // Reset
-  if (keys.has("0")) {
-    modelState.tx = modelState.ty = modelState.tz = 0;
-    modelState.rx = modelState.ry = modelState.rz = 0;
-    modelState.s = 1;
-    modelState.order = "TRS";
-  }
 }
 
 function buildModelMatrix(cube: CubeState) {
